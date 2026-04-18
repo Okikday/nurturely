@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'app.dart';
+import 'core/data/hive_data.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+  await Hive.initFlutter();
+  await HiveData.initHiveData();
+  runApp(const App());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
-}
+
